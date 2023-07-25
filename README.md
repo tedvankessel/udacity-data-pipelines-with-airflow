@@ -3,6 +3,10 @@
 ## Introduction
 ## Datasets
 ## Scema
+## DAG setup
+
+![connection-redshift!](./image/connection-redshift.png "connection-redshift")
+
 ### Prerequisites
 See below.
 ### Installing
@@ -10,6 +14,13 @@ See below.
 ## License
 This project is licensed under the Apache 2.0  License - see the LICENSE.md file for details
 ## Built With
+Starter code was provided by Udacity as follows:
+	/home/workspace/airflow/plugins/final_project_operators/data_quality.py
+	/home/workspace/airflow/plugins/final_project_operators/load_fact.py
+	/home/workspace/airflow/plugins/custom_operators/load_dimensions.py
+	/home/workspace/airflow/plugins/final_project_operators/stage_redshift.py
+	/home/workspace/airflow/dags/udacity/common/final_project_sql_statements.py
+	/home/workspace/airflow/dags/cd0031-automate-data-pipelines/project/starter/final_project.py
 ## Authors
 * **Theodore van Kessel** 
 ## Acknowledgments and sources
