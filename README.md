@@ -5,7 +5,7 @@
 ## Scema
 ## DAG setup
 
-![connection-redshift!](./image/connection-redshift.png "connection-redshift")
+![example DAG](./image_data/Example DAG.png)
 
 ### Prerequisites
 See below.
