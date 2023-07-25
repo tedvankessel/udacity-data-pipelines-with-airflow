@@ -5,7 +5,7 @@
 ## Scema
 ## DAG setup
 
-![example DAG](./image_data/Example DAG.png)
+![example_DAG](./image_data/Example DAG.png)
 
 ### Prerequisites
 See below.
