@@ -12,7 +12,7 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 ## DAG setup
 The suggested DAG flow configuration is shown below:
 
-![Project_DAG_in_the_Airflow_UI](./image_data/Project_DAG_in_the_Airflow_UI.png")
+![Project_DAG_in_the_Airflow_UI](./image_data/Project_DAG_in_the_Airflow_UI.png)
 
 ![example_DAG](./image_data/Example_DAG.png)
 
