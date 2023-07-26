@@ -10,9 +10,11 @@ The source data resides in S3 and needs to be processed in Sparkify's data wareh
 ## Datasets
 ## Scema
 ## DAG setup
-The suggested DAG flow configuration is shown below:
+The suggested individual DAG tasks are shown below (from project docs):
 
 ![Project_DAG_in_the_Airflow_UI](./image_data/Project_DAG_in_the_Airflow_UI.png)
+
+The suggested DAG flow configuration is shown below (from project docs:
 
 ![example_DAG](./image_data/Example_DAG.png)
 
@@ -40,6 +42,7 @@ Starter code was provided by Udacity as follows:
 ## Authors
 * **Theodore van Kessel** 
 ## Acknowledgments and sources
+	Udacity project documents 
 	README-Template - https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
 	ChatGPT
 	Udacity GPT
