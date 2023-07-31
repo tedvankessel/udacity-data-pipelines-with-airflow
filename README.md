@@ -42,8 +42,8 @@ connections:
 	# add S3 bucket varaible
 	airflow variables set s3_bucket tgvkbucket
 	# add aws credentials
-	airflow connections add aws_credentials --conn-type 'aws' --conn-login 'AKIAYVP3Z32ZLAWBPSRW' --conn-password 'Ma2LWc/ifge5GElvZ6aRcuq8HJgeiQ4LXgD0GpLL'
- 
+	airflow connections add aws_credentials 
+ 		note: lind truncated to avoid disclosure of credentials
 ### Rubric item: General
 
 	The dag and plugins do not give an error when imported to Airflow
