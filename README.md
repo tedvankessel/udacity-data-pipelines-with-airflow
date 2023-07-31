@@ -43,6 +43,9 @@ connections:
 
 	The dag and plugins do not give an error when imported to Airflow
 	All tasks have correct dependencies
+ 
+ This is shown in the following screenshot:
+ ![task dependencies](./image_data/tvkDAGv2_task_dependencies.png)
 
 ### Dag configuration
 
@@ -61,6 +64,8 @@ connections:
 	    'catchup_by_default': False,
 	    'email_on_retry': False
 	}
+ The details of the default conviguration and schedule are shown in the following screenshot:
+ ![task details](./image_data/tvkDAGv2_details.png)
 
 ### Installing
 ## References
