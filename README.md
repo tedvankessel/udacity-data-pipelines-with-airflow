@@ -18,13 +18,46 @@ The suggested DAG flow configuration is shown below (from project docs:
 
 ![example_DAG](./image_data/Example_DAG.png)
 
-### Prerequisites
+## Prerequisites and Rubric elements
+The following prerequisites were satisfied from the earlier lessons and were used
+project:
+
 	Create an IAM User in AWS.
 	Configure Redshift Serverless in AWS.
 	Connect Airflow and AWS
 	Creat AWS Redshift credentials in Airflow
 	Create AWS S3 connection in Airflow
 	Connect Airflow to AWS Redshift Serverless
+ 
+I created the auxillary file **airflow_setup_all.sh** to set up the airflow
+connections:
+
+	# add AWS Redshift connection
+	airflow connections add redshift --conn-uri 'redshift://awsuser:Fat2q23cat@default-workgroup.595917921970.us-east-1.redshift-serverless.amazonaws.com:5439/dev'
+	# add S3 bucket varaible
+	airflow variables set s3_bucket tgvkbucket
+	# add aws credentials
+	airflow connections add aws_credentials --conn-type 'aws' --conn-login 'AKIAYVP3Z32ZLAWBPSRW' --conn-password 'Ma2LWc/ifge5GElvZ6aRcuq8HJgeiQ4LXgD0GpLL'
+ 
+ ### General
+The dag and plugins do not give an error when imported to Airflow
+All tasks have correct dependencies
+
+	Default_args object is used in the DAG
+	Defaults_args are bind to the DAG
+	The DAG has a correct schedule
+ 
+ The following is the code used to set the defaul_args. Also see tvkDAGv2.py
+ 
+	 default_args = {
+	    'owner': 'T_van_Kessel',
+	    'start_date': datetime(2019, 1, 12),
+	    'depends_on_past': False,
+	    'retries': 3,
+	    'retry_delay': timedelta(minutes=1),
+	    'catchup_by_default': False,
+	    'email_on_retry': False
+	}
 
 ### Installing
 ## References
