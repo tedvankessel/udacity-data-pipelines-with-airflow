@@ -39,9 +39,12 @@ connections:
 	# add aws credentials
 	airflow connections add aws_credentials --conn-type 'aws' --conn-login 'AKIAYVP3Z32ZLAWBPSRW' --conn-password 'Ma2LWc/ifge5GElvZ6aRcuq8HJgeiQ4LXgD0GpLL'
  
- ### General
-The dag and plugins do not give an error when imported to Airflow
-All tasks have correct dependencies
+### General
+
+	The dag and plugins do not give an error when imported to Airflow
+	All tasks have correct dependencies
+
+### Dag configuration
 
 	Default_args object is used in the DAG
 	Defaults_args are bind to the DAG
