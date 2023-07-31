@@ -38,12 +38,13 @@ I created the auxillary file **airflow_setup_all.sh** to set up the airflow
 connections:
 
 	# add AWS Redshift connection
-	airflow connections add redshift --conn-uri 'redshift://awsuser:Fat2q23cat@default-workgroup.595917921970.us-east-1.redshift-serverless.amazonaws.com:5439/dev'
+	airflow connections add redshift 
+ 		note: line truncated to avoid disclosure of redshift credentials
 	# add S3 bucket varaible
 	airflow variables set s3_bucket tgvkbucket
 	# add aws credentials
 	airflow connections add aws_credentials 
- 		note: lind truncated to avoid disclosure of credentials
+ 		note: line truncated to avoid disclosure of aws credentials
 ### Rubric item: General
 
 	The dag and plugins do not give an error when imported to Airflow
