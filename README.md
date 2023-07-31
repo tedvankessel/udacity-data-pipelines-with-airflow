@@ -18,7 +18,12 @@ The suggested DAG flow configuration is shown below (from project docs:
 
 ![example_DAG](./image_data/Example_DAG.png)
 
-## Prerequisites and Rubric elements
+## Rubric elements
+
+The following sections go through each rubric item and provide evidence of it's
+being done.
+
+### Rubric item: Prerequisites
 The following prerequisites were satisfied from the earlier lessons and were used
 project:
 
@@ -39,15 +44,16 @@ connections:
 	# add aws credentials
 	airflow connections add aws_credentials --conn-type 'aws' --conn-login 'AKIAYVP3Z32ZLAWBPSRW' --conn-password 'Ma2LWc/ifge5GElvZ6aRcuq8HJgeiQ4LXgD0GpLL'
  
-### General
+### Rubric item: General
 
 	The dag and plugins do not give an error when imported to Airflow
 	All tasks have correct dependencies
  
- This is shown in the following screenshot:
+ This is shown in the following screenshot of the loaded tvkDAGv2.py program
+ with the associated dependency graph:
  ![task dependencies](./image_data/tvkDAGv2_task_dependencies.png)
 
-### Dag configuration
+### Rubric item: Dag configuration
 
 	Default_args object is used in the DAG
 	Defaults_args are bind to the DAG
@@ -66,6 +72,13 @@ connections:
 	}
  The details of the default conviguration and schedule are shown in the following screenshot:
  ![task details](./image_data/tvkDAGv2_details.png)
+
+### Rubric item: Staging the data
+
+	Task to stage JSON data is included in the DAG and uses the RedshiftStage operator
+	Task uses params
+	Logging used
+	The database connection is created by using a hook and a connection
 
 ### Installing
 ## References
