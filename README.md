@@ -81,6 +81,34 @@ connections:
 	Logging used
 	The database connection is created by using a hook and a connection
 
+ Two tasks were created for this purpose, **stage_events_to_redshift** and
+ **stage_songs_to_redshift**. The full details of the implementation can be found in
+ the tvkDAGv2.py, stage_redshift_tvk and the sqlqueries_tvk.py files. These embody all
+ aspects of the rubric. The code snippets below show the tasks from the tvkDAGv2.py file. 
+
+	 stage_events_to_redshift = StageToRedshiftOperator(
+	    task_id='Stage_events',
+	    dag=dag,
+	    table = "staging_events",
+	    s3_path = "s3://tgvkbucket/log-data",
+	    redshift_conn_id="redshift",
+	    aws_conn_id="aws_credentials",
+	    region="us-east-1",
+	    data_format="JSON",
+	    sql = "staging_events_table_create"
+	)
+	stage_songs_to_redshift = StageToRedshiftOperator(
+	    task_id='Stage_songs',
+	    dag=dag,
+	    table = "staging_songs",
+	    s3_path = "s3://tgvkbucket/song-data",
+	    redshift_conn_id="redshift",
+	    aws_conn_id="aws_credentials",
+	    region="us-east-1",
+	    data_format="JSON",
+	    sql = "staging_songs_table_create"
+	)
+
 ### Installing
 ## References
 ## License
