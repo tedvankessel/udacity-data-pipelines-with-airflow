@@ -139,7 +139,8 @@ This is principally because they are necessary for debugging.
 Finally, in all cases where the tasks communicate with Redshift, the following hooks are used
 (taken from the stage_redshift_tvk.py):
 
- 	# hook to get redshift credentials
+ 	
+	# hook to get redshift credentials
         aws = AwsHook(self.aws_conn_id)
         credentials = aws.get_credentials()
 
@@ -149,17 +150,76 @@ Finally, in all cases where the tasks communicate with Redshift, the following h
 
 ### Rubric Item: Loading dimensions and facts
 
-	* Set of tasks using the dimension load operator is in the DAG
+	* Set of tasks using the dimension load operator is in the DAG 
 	* A task using the fact load operator is in the DAG
 	* Both operators use params
 	* The dimension task contains a param to allow switch between append and insert-delete functionality
+ 
+ The module load_dimension_tvk.py implements the LoadDimensionOperator which is used by the tasks:
+ 
+		load_user_dimension_table
+		load_song_dimension_table
+		load_artist_dimension_table
+		load_time_dimension_table
+
+The module load_fact_tvk.py implements the LoadFactOperator which is used by the task:
+
+		load_songplays_table
+  
+All of the tasks above and their associated operators use passed parameters that include but are not limited 
+to:
+
+        self.redshift_conn_id = redshift_conn_id	# redshift connection
+        self.table = table				# table name for create or insert
+        self.sql_create = sql_create			# create sql query
+        self.sql = sql					# insert sql query
+        self.append_only = append_only			# append or delete table
+
+  
+The LoadDimensionOperator is passed a parameter **append_only** that determines whether the existing table gets 
+it's rows deleted or not.
+
 
 ### Rubric Item: Data Quality Checks
 
 	* A task using the data quality operator is in the DAG and at least one data quality check is done
 	* The operator raises an error if the check fails pass
 	* The operator is parametrized
+ 
+The data_quality_tvk.py implements a data quality operator to check that each table exists and contains at least 1 row of data.
+A list of tables is passed to the DataQualityOperator as a parameter. Each table in the list is checked. If an error is found, 
+it is logged and an error is raised. Execution continues untill the list is finished.
 
+The following is the output log from the quality check showing that all tables are present and contain data:
+
+	AIRFLOW_CTX_DAG_OWNER=T_van_Kessel
+	AIRFLOW_CTX_DAG_ID=tvkDAGv2
+	AIRFLOW_CTX_TASK_ID=Run_data_quality_checks
+	AIRFLOW_CTX_EXECUTION_DATE=2023-08-03T19:19:39.442626+00:00
+	AIRFLOW_CTX_TRY_NUMBER=1
+	AIRFLOW_CTX_DAG_RUN_ID=manual__2023-08-03T19:19:39.442626+00:00
+	[2023-08-03, 19:31:31 UTC] {base.py:68} INFO - Using connection ID 'redshift' for task execution.
+	[2023-08-03, 19:31:31 UTC] {sql.py:375} INFO - Running statement: SELECT COUNT(*) FROM songplay, parameters: None
+	[2023-08-03, 19:31:31 UTC] {sql.py:384} INFO - Rows affected: 1
+	[2023-08-03, 19:31:32 UTC] {data_quality_tvk.py:48} INFO - Data quality on table songplay check passed with 2476 records
+	[2023-08-03, 19:31:32 UTC] {base.py:68} INFO - Using connection ID 'redshift' for task execution.
+	[2023-08-03, 19:31:32 UTC] {sql.py:375} INFO - Running statement: SELECT COUNT(*) FROM users, parameters: None
+	[2023-08-03, 19:31:32 UTC] {sql.py:384} INFO - Rows affected: 1
+	[2023-08-03, 19:31:32 UTC] {data_quality_tvk.py:48} INFO - Data quality on table users check passed with 107 records
+	[2023-08-03, 19:31:32 UTC] {base.py:68} INFO - Using connection ID 'redshift' for task execution.
+	[2023-08-03, 19:31:32 UTC] {sql.py:375} INFO - Running statement: SELECT COUNT(*) FROM song, parameters: None
+	[2023-08-03, 19:31:32 UTC] {sql.py:384} INFO - Rows affected: 1
+	[2023-08-03, 19:31:32 UTC] {data_quality_tvk.py:48} INFO - Data quality on table song check passed with 62385 records
+	[2023-08-03, 19:31:32 UTC] {base.py:68} INFO - Using connection ID 'redshift' for task execution.
+	[2023-08-03, 19:31:33 UTC] {sql.py:375} INFO - Running statement: SELECT COUNT(*) FROM artist, parameters: None
+	[2023-08-03, 19:31:33 UTC] {sql.py:384} INFO - Rows affected: 1
+	[2023-08-03, 19:31:33 UTC] {data_quality_tvk.py:48} INFO - Data quality on table artist check passed with 21750 records
+	[2023-08-03, 19:31:33 UTC] {base.py:68} INFO - Using connection ID 'redshift' for task execution.
+	[2023-08-03, 19:31:33 UTC] {sql.py:375} INFO - Running statement: SELECT COUNT(*) FROM time, parameters: None
+	[2023-08-03, 19:31:33 UTC] {sql.py:384} INFO - Rows affected: 1
+	[2023-08-03, 19:31:33 UTC] {data_quality_tvk.py:48} INFO - Data quality on table time check passed with 8023 records
+	[2023-08-03, 19:31:33 UTC] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=tvkDAGv2, task_id=Run_data_quality_checks, execution_date=20230803T191939, start_date=20230803T193130, end_date=20230803T193133
+	[2023-08-03, 19:31:33 UTC] {local_task_job.py:156} INFO - Task exited with return code 0
 
 ### Installing
 ## References
@@ -175,7 +235,9 @@ Starter code was provided by Udacity as follows:
 	/home/workspace/airflow/dags/udacity/common/final_project_sql_statements.py
 	/home/workspace/airflow/dags/cd0031-automate-data-pipelines/project/starter/final_project.py
 ## Authors
+
 	* **Theodore van Kessel** 
+ 
 ## Acknowledgments and sources
 	Udacity project documents 
 	README-Template - https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
