@@ -96,7 +96,7 @@ connections:
 	    'catchup_by_default': False,
 	    'email_on_retry': False
 	}
- The details of the default conviguration and schedule are shown in the following screenshot:
+ The details of the default configuration and schedule are shown in the following screenshot:
  ![task details](./image_data/tvkDAGv2_details.png)
 
 ### Rubric item: Staging the data
@@ -133,6 +133,19 @@ connections:
 	    data_format="JSON",
 	    sql = "staging_songs_table_create"
 	)
+Within the StageToRedshiftOperator (and the other plugins) extensive use of event logging is used. 
+This is principally because they are necessary for debugging. 
+
+Finally, in all cases where the tasks communicate with Redshift, the following hooks are used
+(taken from the stage_redshift_tvk.py):
+
+ 	# hook to get redshift credentials
+        aws = AwsHook(self.aws_conn_id)
+        credentials = aws.get_credentials()
+
+        # hook to get a redshift connection
+        self.log.info(f"tvk-temp-debug aws creds {credentials}")
+        redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
 
 ### Rubric Item: Loading dimensions and facts
 
