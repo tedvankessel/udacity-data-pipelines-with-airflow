@@ -1,4 +1,4 @@
-# udacity-data-pipelines-with-airflow
+# Udacity-data-pipelines-with-airflow
 ## <p>Automate Data Pipelines Project 4
 ## Introduction 
 (from the project introduction)
@@ -29,6 +29,11 @@ The datasets used for this project are provided by Udacity in their Amazon S3 bu
 	Song data: s3://udacity-dend/song_data
 	
 ## Scema
+
+The following illustration shows the schema we are trying to acheive with the tvkDAGv2.py program and the data above in Redshift:
+
+![Project_schema](./image_data/tvkDAGv2_schema.png)
+
 ## DAG setup
 The suggested individual DAG tasks are shown below (from project docs):
 
@@ -45,7 +50,7 @@ being done.
 
 ### Rubric item: Prerequisites
 The following prerequisites were satisfied from the earlier lessons and were used
-project:
+in this project:
 
 	Create an IAM User in AWS.
 	Configure Redshift Serverless in AWS.
