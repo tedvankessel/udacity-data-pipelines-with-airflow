@@ -7,7 +7,27 @@ A music streaming company, Sparkify, has decided that it is time to introduce mo
 They have decided to bring you into the project and expect you to create high grade data pipelines that are dynamic and built from reusable tasks, can be monitored, and allow easy backfills. They have also noted that the data quality plays a big part when analyses are executed on top the data warehouse and want to run tests against their datasets after the ETL steps have been executed to catch any discrepancies in the datasets.
 
 The source data resides in S3 and needs to be processed in Sparkify's data warehouse in Amazon Redshift. The source datasets consist of JSON logs that tell about user activity in the application and JSON metadata about the songs the users listen to.
+## Code
+The following code elements comprise the project:
+
+	* tvkDAGv2.py 			this is the main DAG
+	* data_quality_tvk.py		implements the data quality checks
+	* load_dimension_tvk.py		loads the data dimension tables
+	* load_fact_tvk.py		loads the data fact tables
+	* sqlqueries_tvk.py		contains the SqlQueries class and the associated queries to create and load tables
+	* stage_redshift_tvk.py		copies the data from Amazon S3 to Redshift
+ 	* airflow_setup_all.sh		sets up the Redshift connection, S3 path and the Redshift credentials
+
+The **tvkDAGv2.py** is located in the **dags/** directory.
+The remaining files are all located for convenience in the **plugins/final_project_operators/** directory
+
 ## Datasets
+
+The datasets used for this project are provided by Udacity in their Amazon S3 bucket:
+
+	Log data: s3://udacity-dend/log_data
+	Song data: s3://udacity-dend/song_data
+	
 ## Scema
 ## DAG setup
 The suggested individual DAG tasks are shown below (from project docs):
@@ -137,7 +157,7 @@ Starter code was provided by Udacity as follows:
 	/home/workspace/airflow/dags/udacity/common/final_project_sql_statements.py
 	/home/workspace/airflow/dags/cd0031-automate-data-pipelines/project/starter/final_project.py
 ## Authors
-* **Theodore van Kessel** 
+	* **Theodore van Kessel** 
 ## Acknowledgments and sources
 	Udacity project documents 
 	README-Template - https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
@@ -145,4 +165,8 @@ Starter code was provided by Udacity as follows:
 	Udacity GPT
 	Google
 	Github references: 
+ 		https://github.com/xingyazhou/udacity-data-pipelines-with-airflow
+   		https://github.com/cheuklau/udacity-dataeng-airflow
+     		https://github.com/write4alive/Data-Pipelines-with-Apache-Airflow
+       		https://github.com/tedvankessel/Data-Warehouse-Song-Play-Project
 
