@@ -56,9 +56,9 @@ connections:
 
 ### Rubric item: Dag configuration
 
-	Default_args object is used in the DAG
-	Defaults_args are bind to the DAG
-	The DAG has a correct schedule
+	* Default_args object is used in the DAG
+	* Defaults_args are bind to the DAG
+	* The DAG has a correct schedule
  
  The following is the code used to set the defaul_args. Also see tvkDAGv2.py
  
@@ -76,10 +76,10 @@ connections:
 
 ### Rubric item: Staging the data
 
-	Task to stage JSON data is included in the DAG and uses the RedshiftStage operator
-	Task uses params
-	Logging used
-	The database connection is created by using a hook and a connection
+	* Task to stage JSON data is included in the DAG and uses the RedshiftStage operator
+	* Task uses params
+	* Logging used
+	* The database connection is created by using a hook and a connection
 
  Two tasks were created for this purpose, **stage_events_to_redshift** and
  **stage_songs_to_redshift**. The full details of the implementation can be found in
@@ -108,6 +108,20 @@ connections:
 	    data_format="JSON",
 	    sql = "staging_songs_table_create"
 	)
+
+### Rubric Item: Loading dimensions and facts
+
+	* Set of tasks using the dimension load operator is in the DAG
+	* A task using the fact load operator is in the DAG
+	* Both operators use params
+	* The dimension task contains a param to allow switch between append and insert-delete functionality
+
+### Rubric Item: Data Quality Checks
+
+	* A task using the data quality operator is in the DAG and at least one data quality check is done
+	* The operator raises an error if the check fails pass
+	* The operator is parametrized
+
 
 ### Installing
 ## References
