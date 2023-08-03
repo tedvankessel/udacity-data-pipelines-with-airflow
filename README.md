@@ -27,7 +27,20 @@ The datasets used for this project are provided by Udacity in their Amazon S3 bu
 
 	Log data: s3://udacity-dend/log_data
 	Song data: s3://udacity-dend/song_data
-	
+ 
+## Acknowledgments and Sources of Code and Data:
+
+	Udacity project documents 
+	README-Template - https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+	ChatGPT
+	Udacity GPT
+	Google
+	Github references: 
+ 	
+ 		https://github.com/xingyazhou/udacity-data-pipelines-with-airflow
+   		https://github.com/cheuklau/udacity-dataeng-airflow
+     		https://github.com/write4alive/Data-Pipelines-with-Apache-Airflow
+		https://github.com/tedvankessel/Data-Warehouse-Song-Play-Project
 ## Scema
 
 The following illustration shows the schema we are trying to acheive with the tvkDAGv2.py program and the data above in Redshift:
@@ -234,19 +247,8 @@ Starter code was provided by Udacity as follows:
 	/home/workspace/airflow/plugins/final_project_operators/stage_redshift.py
 	/home/workspace/airflow/dags/udacity/common/final_project_sql_statements.py
 	/home/workspace/airflow/dags/cd0031-automate-data-pipelines/project/starter/final_project.py
-## Authors
-
-	* **Theodore van Kessel** 
+## Author
+**Theodore van Kessel** 
  
-## Acknowledgments and sources
-	Udacity project documents 
-	README-Template - https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
-	ChatGPT
-	Udacity GPT
-	Google
-	Github references: 
- 		https://github.com/xingyazhou/udacity-data-pipelines-with-airflow
-   		https://github.com/cheuklau/udacity-dataeng-airflow
-     		https://github.com/write4alive/Data-Pipelines-with-Apache-Airflow
-       		https://github.com/tedvankessel/Data-Warehouse-Song-Play-Project
+
 
