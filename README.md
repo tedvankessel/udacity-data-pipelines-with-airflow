@@ -152,12 +152,11 @@ This is principally because they are necessary for debugging.
 Finally, in all cases where the tasks communicate with Redshift, the following hooks are used
 (taken from the stage_redshift_tvk.py):
 
- 	
 	# hook to get redshift credentials
         aws = AwsHook(self.aws_conn_id)
         credentials = aws.get_credentials()
 
-        # hook to get a redshift connection
+	# hook to get a redshift connection
         self.log.info(f"tvk-temp-debug aws creds {credentials}")
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
 
