@@ -10,8 +10,8 @@ class SqlQueries:
     this class defines SQL queries used by the tvkDAGv2.py program and related programs to create the tables used in the 
     Automate Data Pipelines Project
     """
-    # create and insert data into the songplay fact table from staging tables
 
+    # create and insert data into the songplay fact table from staging tables
     songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS {} (
     songplay_id bigint IDENTITY(0,1) PRIMARY KEY,
@@ -209,3 +209,13 @@ class SqlQueries:
     year int
     )
     """)
+
+    # The dictionary below defines the tests to be used in the data_quality evaluation
+    # and the expected result
+
+    dq_checks=[
+        {'check_sql': "SELECT COUNT(*) FROM users WHERE user_id is null", 'expected_result': 0},
+        {'check_sql': "SELECT COUNT(*) FROM song WHERE song_id is null", 'expected_result': 0},
+        {'check_sql': "SELECT COUNT(*) FROM artist WHERE artist_id is null", 'expected_result': 0},
+        {'check_sql': "SELECT COUNT(*) FROM time WHERE start_time is null", 'expected_result': 0}
+    ]

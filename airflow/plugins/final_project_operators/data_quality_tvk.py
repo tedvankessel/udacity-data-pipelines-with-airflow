@@ -9,6 +9,8 @@ from airflow.hooks.postgres_hook import PostgresHook
 from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
+from final_project_operators.sqlqueries_tvk import SqlQueries
+
 class DataQualityOperator(BaseOperator):
     """
     this class performs quality tests on a list of tables passed as parameters from the tvkDAGv2.py program.
@@ -32,11 +34,53 @@ class DataQualityOperator(BaseOperator):
     def execute(self, context):
         # redshift hook to get a connection
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
+        # load the test specifications as recommended by auditor
+        dq_checks = SqlQueries.dq_checks
+        for check in dq_checks:
+            check_sql = check['check_sql']
+            expected_result = check['expected_result']
+            
+            # Printing the test query and expected values
+            self.log.info("----------------------")
+            self.log.info(f"Check SQL: {check_sql}")
+            self.log.info(f"Expected Result: {expected_result}")
+            self.log.info("----------------------")
+            try:
+                # access and verify test specifications in log
+                self.log.info("query sql: ")
+                sql = {check_sql}
+                self.log.info(sql)
+                # run test
+                records = redshift.get_records(sql) 
+                # access the results and verify type and values in logs
+                num_records = records[0][0]
+                self.log.info("num_records returned: ")
+                self.log.info(num_records)
+                self.log.info("type of num_records: ")
+                self.log.info(type(num_records))
+                test_value = num_records[0]
+                self.log.info("test_value: ")
+                self.log.info(test_value)
 
+                expected_result = {expected_result}
+                self.log.info("type of expected_result: ")
+                self.log.info(type(expected_result))
+                expected_value = list(expected_result)[0]
+                self.log.info("expected_value: ")
+                self.log.info(expected_value)
+                # determine test outcome
+                if test_value == expected_value:
+                    self.log.info("--------TEST PASSED--------")
+                else:
+                    self.log.info("--------TEST FAILED--------")
+            except:
+                self.log.info("--------ERROR RUNNING TEST --------")
+        #
         # cycle through each table passed as a list in the parameter "tables" 
         for table in self.tables:
             try:
                 # try to count the rows in the table and raise error if no data found
+                # note, this is the suggested method from Solution 3.2
                 records = redshift.get_records("SELECT COUNT(*) FROM {}".format(table))        
                 if len(records) < 1 or len(records[0]) < 1:
                     self.log.error("{} returned no results".format(table))

@@ -101,7 +101,7 @@ class StageToRedshiftOperator(BaseOperator):
         # Backfill a specific date
         if self.execution_date:
             self.log.info("Path 1")
-            formatted_sql = StageToRedshiftOperator.copy_sql_time.format(
+            formatted_sql = StageToRedshiftOperator.copy_sql_date.format(
                 self.table, 
                 self.s3_path, 
                 self.execution_date.strftime("%Y"),
@@ -123,6 +123,8 @@ class StageToRedshiftOperator(BaseOperator):
                 self.data_format,
                 self.execution_date
             )
+        self.log.info("self.execution_date")
+        self.log.info("Execution Date: %s", self.execution_date)
         # log query info to confirm
         self.log.info("query info:")
         self.log.info(formatted_sql)
